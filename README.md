@@ -26,14 +26,14 @@ docker build -t proxmoxnode-probe . --no-cache
 ## Dry run
 
 Available checks:
-- `xxx`
+- `guests`
 
 Create a yaml file, for example _(test.yaml)_:
 
 ```yaml
 asset:
   name: "foo.local"
-  check: "xxx"
+  check: "guests"
   config:
     address: "192.168.1.2"
 ```

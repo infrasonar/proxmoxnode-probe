@@ -1,11 +1,11 @@
 from libprobe.probe import Probe
-from lib.check.xxx import check_xxx
+from lib.check.guests import check_guests
 from lib.version import __version__ as version
 
 
 if __name__ == '__main__':
     checks = {
-        'xxx': check_xxx
+        'guests': check_guests
     }
 
     probe = Probe("proxmoxnode", version, checks)
