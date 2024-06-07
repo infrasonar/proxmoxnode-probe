@@ -5,6 +5,7 @@ from libprobe.exceptions import CheckException
 
 DEFAULT_PORT = 8006
 
+
 async def check_guests(
         asset: Asset,
         asset_config: dict,
