@@ -27,6 +27,7 @@ docker build -t proxmoxnode-probe . --no-cache
 
 Available checks:
 - `guests`
+- `storage`
 
 Create a yaml file, for example _(test.yaml)_:
 
@@ -36,6 +37,7 @@ asset:
   check: "guests"
   config:
     address: "192.168.1.2"
+    node: "pve"
 ```
 
 Run the probe with the `DRY_RUN` environment variable set the the yaml file above.
