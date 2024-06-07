@@ -14,14 +14,15 @@ async def check_guests(
     if not address:
         address = asset.name
     port = config.get('port', DEFAULT_PORT)
-    node = config.get('node')  # TODOK DEFAULT_NODE "pve"?
+    ssl = config.get('ssl', False)
+    node = config.get('node')
     if node is None:
         raise CheckException('invalid config: missing `node`')
 
     username = asset_config.get('username')
     realm = asset_config.get('realm')
     token_id = asset_config.get('token_id')
-    token = asset_config.get('token')
+    token = asset_config.get('secret')
     if None in (username, realm, token_id, token):
         raise CheckException('missing credentials')
 
@@ -30,7 +31,7 @@ async def check_guests(
     }
     url = f'https://{address}:{port}/api2/json/nodes/{node}/qemu'
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, headers=headers, ssl=False) as resp:
+        async with session.get(url, headers=headers, ssl=ssl) as resp:
             resp.raise_for_status()
             data = await resp.json()
 
@@ -50,7 +51,7 @@ async def check_guests(
         'netout': d.get('netout'),
         'pid': d.get('pid'),
         'uptime': d.get('uptime'),
-        'vm_name': d.get('name'),
+        'vmname': d.get('name'),
     } for d in data['data']]
     return {
         'guests': guests
