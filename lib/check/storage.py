@@ -1,6 +1,7 @@
 import aiohttp
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
+from ..utils import to_bool, to_list_str
 
 
 DEFAULT_PORT = 8006
@@ -36,17 +37,16 @@ async def check_storage(
             data = await resp.json()
 
     storage = [{
-        'name': d['storage'],  # ???
-        'content': d['content'],  # ???
-        'type': d['type'],  # ???
-        'active': d.get('active'),  # ???
-        'avail': d.get('avail'),  # ???
-        'enabled': d.get('enabled'),  # ???
-        # 'format': d.get('format'),  # ???
-        'shared': d.get('shared'),  # ???
-        'total': d.get('total'),  # ???
-        'used': d.get('used'),  # ???
-        'used_fraction': d.get('used_fraction'),  # ???
+        'name': d['storage'],  # str
+        'content': to_list_str(d['content']),  # liststr
+        'type': d['type'],  # str
+        'active': to_bool(d.get('active')),  # bool
+        'avail': d.get('avail'),  # int
+        'enabled': to_bool(d.get('enabled')),  # bool
+        'shared': to_bool(d.get('shared')),  # bool
+        'total': d.get('total'),  # int
+        'used': d.get('used'),  # int
+        'used_fraction': d.get('used_fraction'),  # int
     } for d in data['data']]
     return {
         'storage': storage

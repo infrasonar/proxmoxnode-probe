@@ -37,21 +37,8 @@ async def check_guests(
 
     guests = [{
         'name': str(d['vmid']),  # str
-        'status': d['status'],  # ???
-        'vmid': d['vmid'],  # ???
-        'cpu': d.get('cpu'),  # ???
-        'cpus': d.get('cpus'),  # ???
-        'disk': d.get('disk'),  # ???
-        'diskread': d.get('diskread'),  # ???
-        'diskwrite': d.get('diskwrite'),  # ???
-        'maxdisk': d.get('maxdisk'),  # ???
-        'maxmem': d.get('maxmem'),  # ???
-        'mem': d.get('mem'),  # ???
-        'netin': d.get('netin'),  # ???
-        'netout': d.get('netout'),  # ???
-        'pid': d.get('pid'),  # ???
-        'uptime': d.get('uptime'),  # ???
-        'vmname': d.get('name'),  # ???
+        'status': d['status'],  # str
+        'vm_name': d.get('name'),  # str
     } for d in data['data']]
     return {
         'guests': guests
