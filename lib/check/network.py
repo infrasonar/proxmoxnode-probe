@@ -36,22 +36,22 @@ async def check_network(
             data = await resp.json()
 
     network = [{
-        'name': d['iface'],
-        'active': d.get('active'),  # optional
-        'address': d.get('address'),  # optional
-        'autostart': d.get('autostart'),  # optional
-        'bridge_fd': d.get('bridge_fd'),  # optional
-        'bridge_ports': d.get('bridge_ports'),  # optional
-        'bridge_stp': d.get('bridge_stp'),  # optional
-        'cdir': d.get('cdir'),  # optional
-        'exists': d.get('exists'),  # optional
-        'families': d.get('families'),
-        'gateway': d.get('gateway'),  # optional
-        'method': d.get('method'),
-        'method6': d.get('method6'),
-        'netmask': d.get('netmask'),  # optional
-        'priority': d.get('priority'),
-        'type': d.get('type'),
+        'name': d['iface'],  # str
+        'active': d.get('active'),  # ???, optional
+        'address': d.get('address'),  # str, optional
+        'autostart': d.get('autostart'),  # ???, optional
+        'bridge_fd': d.get('bridge_fd'),  # ???, optional
+        'bridge_ports': d.get('bridge_ports'),  # ???, optional
+        'bridge_stp': d.get('bridge_stp'),  # ???, optional
+        'cdir': d.get('cdir'),  # ???, optional
+        'exists': d.get('exists'),  # ???, optional
+        'families': d.get('families'),  # ???
+        'gateway': d.get('gateway'),  # ???, optional
+        'method': d.get('method'),  # ???
+        'method6': d.get('method6'),  # ???
+        'netmask': d.get('netmask'),  # ??? optional
+        'priority': d.get('priority'),  # ???
+        'type': d.get('type'),  # ???
 
     } for d in data['data']]
     return {

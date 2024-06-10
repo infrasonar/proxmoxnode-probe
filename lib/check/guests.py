@@ -36,22 +36,22 @@ async def check_guests(
             data = await resp.json()
 
     guests = [{
-        'name': str(d['vmid']),
-        'status': d['status'],
-        'vmid': d['vmid'],
-        'cpu': d.get('cpu'),
-        'cpus': d.get('cpus'),
-        'disk': d.get('disk'),
-        'diskread': d.get('diskread'),
-        'diskwrite': d.get('diskwrite'),
-        'maxdisk': d.get('maxdisk'),
-        'maxmem': d.get('maxmem'),
-        'mem': d.get('mem'),
-        'netin': d.get('netin'),
-        'netout': d.get('netout'),
-        'pid': d.get('pid'),
-        'uptime': d.get('uptime'),
-        'vmname': d.get('name'),
+        'name': str(d['vmid']),  # str
+        'status': d['status'],  # ???
+        'vmid': d['vmid'],  # ???
+        'cpu': d.get('cpu'),  # ???
+        'cpus': d.get('cpus'),  # ???
+        'disk': d.get('disk'),  # ???
+        'diskread': d.get('diskread'),  # ???
+        'diskwrite': d.get('diskwrite'),  # ???
+        'maxdisk': d.get('maxdisk'),  # ???
+        'maxmem': d.get('maxmem'),  # ???
+        'mem': d.get('mem'),  # ???
+        'netin': d.get('netin'),  # ???
+        'netout': d.get('netout'),  # ???
+        'pid': d.get('pid'),  # ???
+        'uptime': d.get('uptime'),  # ???
+        'vmname': d.get('name'),  # ???
     } for d in data['data']]
     return {
         'guests': guests

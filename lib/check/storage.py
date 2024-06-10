@@ -36,17 +36,17 @@ async def check_storage(
             data = await resp.json()
 
     storage = [{
-        'name': d['storage'],
-        'content': d['content'],
-        'type': d['type'],
-        'active': d.get('active'),
-        'avail': d.get('avail'),
-        'enabled': d.get('enabled'),
-        # 'format': d.get('format'),
-        'shared': d.get('shared'),
-        'total': d.get('total'),
-        'used': d.get('used'),
-        'used_fraction': d.get('used_fraction'),
+        'name': d['storage'],  # ???
+        'content': d['content'],  # ???
+        'type': d['type'],  # ???
+        'active': d.get('active'),  # ???
+        'avail': d.get('avail'),  # ???
+        'enabled': d.get('enabled'),  # ???
+        # 'format': d.get('format'),  # ???
+        'shared': d.get('shared'),  # ???
+        'total': d.get('total'),  # ???
+        'used': d.get('used'),  # ???
+        'used_fraction': d.get('used_fraction'),  # ???
     } for d in data['data']]
     return {
         'storage': storage
