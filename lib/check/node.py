@@ -56,7 +56,7 @@ async def check_node(
         'uptime': node.get('uptime'),  # int
     }
     state = {
-        'node': item,
+        'node': [item],
     }
     if boot is not None:
         state['bootinfo'] = [{
