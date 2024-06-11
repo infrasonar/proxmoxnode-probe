@@ -50,7 +50,7 @@ async def check_node(
         'pveversion': node.get('pveversion'),  # str
         'loadavg': [float(v) for v in node['loadavg']] \
             if isinstance(node.get('loadavg'), list) else None,
-        'cpu': to_float(node.get('cpu')),  # int
+        'cpu': to_float(node.get('cpu')),  # float
         'idle': to_float(node.get('idle')),  # float
         'wait': to_float(node.get('wait')),  # float
         'uptime': node.get('uptime'),  # int
