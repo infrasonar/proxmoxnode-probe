@@ -1,6 +1,8 @@
 import aiohttp
+from typing import Optional
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
+from ..utils import to_bool
 
 
 DEFAULT_PORT = 8006
@@ -36,23 +38,22 @@ async def check_network(
             data = await resp.json()
 
     network = [{
-        'name': d['iface'],
-        'active': d.get('active'),  # optional
-        'address': d.get('address'),  # optional
-        'autostart': d.get('autostart'),  # optional
-        'bridge_fd': d.get('bridge_fd'),  # optional
-        'bridge_ports': d.get('bridge_ports'),  # optional
-        'bridge_stp': d.get('bridge_stp'),  # optional
-        'cdir': d.get('cdir'),  # optional
-        'exists': d.get('exists'),  # optional
-        'families': d.get('families'),
-        'gateway': d.get('gateway'),  # optional
-        'method': d.get('method'),
-        'method6': d.get('method6'),
-        'netmask': d.get('netmask'),  # optional
-        'priority': d.get('priority'),
-        'type': d.get('type'),
-
+        'name': d['iface'],  # str
+        'active': d.get('active'),  # int/optional
+        'address': d.get('address'),  # str/optional
+        'autostart': to_bool(d.get('autostart')),  # int/optional
+        'bridge_fd': d.get('bridge_fd'),  # str/optional
+        'bridge_ports': d.get('bridge_ports'),  # str/ optional
+        'bridge_stp': d.get('bridge_stp'),  # str/optional
+        'cdir': d.get('cdir'),  # str/optional
+        'exists': to_bool(d.get('exists')),  # int/optional
+        'families': d.get('families'),  # liststr/optional
+        'gateway': d.get('gateway'),  # str/optional
+        'method': d.get('method'),  # str
+        'method6': d.get('method6'),  # str
+        'netmask': d.get('netmask'),  # str/optional
+        'priority': d.get('priority'),  # int
+        'type': d.get('type'),  # str
     } for d in data['data']]
     return {
         'network': network
