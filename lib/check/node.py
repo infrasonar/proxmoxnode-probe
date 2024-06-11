@@ -37,7 +37,7 @@ async def check_node(
             data = await resp.json()
 
     node = data['data']
-    boot = node.get('bootinfo')
+    boot = node.get('boot-info')
     cpu = node.get('cpuinfo')
     k = node.get('current-kernel')
     ksm = node.get('ksm')
@@ -47,12 +47,12 @@ async def check_node(
     item = {
         'name': 'node',  # str
         'kversion': node.get('kversion'),  # str
-        'pversion': node.get('pversion'),  # str
+        'pveversion': node.get('pveversion'),  # str
         'loadavg': [float(v) for v in node['loadavg']] \
             if isinstance(node.get('loadavg'), list) else None,
-        'cpu': node.get('cpu'),  # int
-        'idle': node.get('idle'),  # int
-        'wait': node.get('wait'),  # int
+        'cpu': to_float(node.get('cpu')),  # int
+        'idle': to_float(node.get('idle')),  # float
+        'wait': to_float(node.get('wait')),  # float
         'uptime': node.get('uptime'),  # int
     }
     state = {
