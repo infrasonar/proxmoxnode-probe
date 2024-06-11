@@ -28,6 +28,7 @@ docker build -t proxmoxnode-probe . --no-cache
 Available checks:
 - `guests`
 - `network`
+- `node`
 - `storage`
 
 Create a yaml file, for example _(test.yaml)_:
