@@ -46,7 +46,8 @@ async def check_storage(
         'shared': to_bool(d.get('shared')),  # bool
         'total': d.get('total'),  # int
         'used': d.get('used'),  # int
-        'used_fraction': d.get('used_fraction'),  # int
+        'percent_used': float(d['used_fraction'] * 100) \
+        if isinstance(d.get('used_fraction'), (int, float)) else None,
     } for d in data['data']]
     return {
         'storage': storage

@@ -1,7 +1,7 @@
 import aiohttp
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
-from ..utils import to_bool, to_int, to_float, to_list_str
+from ..utils import to_bool, to_int, to_float, to_list_str, to_percent_used
 
 
 DEFAULT_PORT = 8006
@@ -96,6 +96,8 @@ async def check_node(
             'free': mem.get('free'),  # int
             'total': mem.get('total'),  # int
             'used': mem.get('used'),  # int
+            'percent_used':
+            to_percent_used(mem.get('total'), mem.get('used'))
         }]
     if swap is not None:
         state['swap'] = [{
@@ -103,6 +105,8 @@ async def check_node(
             'free': swap.get('free'),  # int
             'total': swap.get('total'),  # int
             'used': swap.get('used'),  # int
+            'percent_used':
+            to_percent_used(swap.get('total'), swap.get('used'))
         }]
     if rootfs is not None:
         state['rootfs'] = [{
@@ -111,6 +115,8 @@ async def check_node(
             'free': rootfs.get('free'),  # int
             'total': rootfs.get('total'),  # int
             'used': rootfs.get('used'),  # int
+            'percent_used':
+            to_percent_used(rootfs.get('total'), rootfs.get('used'))
         }]
 
     return state
