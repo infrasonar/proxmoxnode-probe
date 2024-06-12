@@ -28,4 +28,4 @@ def to_list_str(val: Optional[str], s: Optional[str] = ',') -> List[str]:
 def to_percent_used(total: Optional[int], used: Optional[int]) -> float:
     if used is None or total is None or total <= 0:
         return
-    return used / total
+    return used / total * 100
