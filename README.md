@@ -23,6 +23,23 @@ Variable            | Default                        | Description
 docker build -t proxmoxnode-probe . --no-cache
 ```
 
+## Config
+
+Example config _(change the `username`, `token_id` and `secret` to your own values and if required choose another `realm`)_:
+
+```yaml
+proxmoxcluster:
+  config:
+    username: root
+    realm: pam
+    token_id: monitoring
+    secret: 12345678-1234-1234-1234-1234567890ab
+proxmoxnode:
+  use: proxmoxcluster
+proxmoxguest:
+  use: proxmoxcluster
+```
+
 ## Dry run
 
 Available checks:
@@ -36,10 +53,12 @@ Create a yaml file, for example _(test.yaml)_:
 ```yaml
 asset:
   name: "foo.local"
-  check: "guests"
+  check: "node"
   config:
-    address: "192.168.1.2"
+    address: "10.0.0.1"
     node: "pve"
+    port: 8006
+    ssl: false
 ```
 
 Run the probe with the `DRY_RUN` environment variable set the the yaml file above.
@@ -47,3 +66,7 @@ Run the probe with the `DRY_RUN` environment variable set the the yaml file abov
 ```
 DRY_RUN=test.yaml python main.py
 ```
+
+## Proxmox API documentation
+
+https://pve.proxmox.com/pve-docs/api-viewer
