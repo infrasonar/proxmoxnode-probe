@@ -39,7 +39,7 @@ async def check_network(
 
     network = [{
         'name': d['iface'],  # str
-        'active': d.get('active'),  # int/optional
+        'active': to_bool(d.get('active')),  # bool/optional
         'address': d.get('address'),  # str/optional
         'autostart': to_bool(d.get('autostart')),  # int/optional
         'bridge_fd': d.get('bridge_fd'),  # str/optional
