@@ -13,10 +13,10 @@ def to_int(val: Optional[str]) -> int:
     return int(val)
 
 
-def to_float(val: Optional[str]) -> float:
+def to_float(val: Optional[str], multiply: Optional[float] = 1.0) -> float:
     if val is None:
         return
-    return float(val)
+    return float(val) * multiply
 
 
 def to_list_str(val: Optional[str], s: Optional[str] = ',') -> List[str]:
