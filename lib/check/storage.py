@@ -1,7 +1,7 @@
 import aiohttp
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
-from ..utils import to_bool, to_list_str
+from ..utils import to_bool, to_float, to_list_str
 
 
 DEFAULT_PORT = 8006
@@ -46,8 +46,7 @@ async def check_storage(
         'shared': to_bool(d.get('shared')),  # bool
         'total': d.get('total'),  # int
         'used': d.get('used'),  # int
-        'percent_used': float(d['used_fraction'] * 100) \
-        if isinstance(d.get('used_fraction'), (int, float)) else None,
+        'percent_used': to_float(d.get('used_fraction'), 100.0),
     } for d in data['data']]
     return {
         'storage': storage
