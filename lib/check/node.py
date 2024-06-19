@@ -1,7 +1,7 @@
 import aiohttp
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
-from ..utils import to_bool, to_int, to_float, to_list_str, to_percent_used
+from ..utils import to_bool, to_int, to_float, to_percent_used
 
 
 DEFAULT_PORT = 8006
