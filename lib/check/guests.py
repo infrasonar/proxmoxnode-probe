@@ -12,6 +12,7 @@ async def check_guests(
 
     vm = [{
         'name': str(d['vmid']),  # str
+        'vmid': d['vmid'],  # int
         'status': d['status'],  # str
         'vm_name': d.get('name'),  # str
     } for d in data['data']]
@@ -21,6 +22,7 @@ async def check_guests(
 
     ct = [{
         'name': str(d['vmid']),  # str
+        'vmid': d['vmid'],  # int
         'status': d['status'],  # str
         'ct_name': d.get('name'),  # str
     } for d in data['data']]
