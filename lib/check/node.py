@@ -6,6 +6,7 @@ from ..helpers import api_request
 
 class CheckNode(Check):
     key = 'node'
+    unchanged_eol = 0
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:
