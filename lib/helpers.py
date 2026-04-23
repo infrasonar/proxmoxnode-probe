@@ -12,11 +12,11 @@ VMID_MAP: dict[int, str] = {}
 
 async def _update_vmid_map(
         asset: Asset,
-        asset_config: dict,
+        local_config: dict,
         config: dict):
     uri = '/resources'
     capture = ('qemu', 'lxc')
-    data = await api_request(asset, asset_config, config, uri)
+    data = await api_request(asset, local_config, config, uri)
 
     VMID_MAP.clear()
 
@@ -27,7 +27,7 @@ async def _update_vmid_map(
 
 async def api_request(
         asset: Asset,
-        asset_config: dict,
+        local_config: dict,
         config: dict,
         uri: str,
         target: str = 'cluster') -> dict:
@@ -37,10 +37,10 @@ async def api_request(
     port = config.get('port', DEFAULT_PORT)
     ssl = config.get('ssl', False)
 
-    username = asset_config.get('username')
-    realm = asset_config.get('realm', 'pam')
-    token_id = asset_config.get('token_id')
-    token = asset_config.get('secret')
+    username = local_config.get('username')
+    realm = local_config.get('realm', 'pam')
+    token_id = local_config.get('token_id')
+    token = local_config.get('secret')
     if None in (username, realm, token_id, token):
         raise CheckException('missing credentials')
 
@@ -65,7 +65,7 @@ async def api_request(
 
         node = VMID_MAP.get(vmid)
         if node is None:
-            await _update_vmid_map(asset, asset_config, config)
+            await _update_vmid_map(asset, local_config, config)
             node = VMID_MAP.get(vmid)
             if node is None:
                 raise CheckException(f'cannot find VMID {vmid} on cluster')
@@ -88,7 +88,7 @@ async def api_request(
             return data  # success, we're done
 
         # update vmid->node map and try again...
-        await _update_vmid_map(asset, asset_config, config)
+        await _update_vmid_map(asset, local_config, config)
         node = VMID_MAP.get(vmid)
         if node is None:
             raise CheckException(f'cannot find VMID {vmid} on cluster')
