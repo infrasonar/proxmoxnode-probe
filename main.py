@@ -1,18 +1,18 @@
 from libprobe.probe import Probe
-from lib.check.guests import check_guests
-from lib.check.network import check_network
-from lib.check.node import check_node
-from lib.check.storage import check_storage
+from lib.check.guests import CheckGuests
+from lib.check.network import CheckNetwork
+from lib.check.node import CheckNode
+from lib.check.storage import CheckStorage
 from lib.version import __version__ as version
 
 
 if __name__ == '__main__':
-    checks = {
-        'guests': check_guests,
-        'network': check_network,
-        'node': check_node,
-        'storage': check_storage,
-    }
+    checks = (
+        CheckGuests,
+        CheckNetwork,
+        CheckNode,
+        CheckStorage,
+    )
 
     probe = Probe("proxmoxnode", version, checks)
 
